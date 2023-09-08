@@ -1,37 +1,16 @@
-$('#navigation a').on('click', function(e) {
-  e.preventDefault();
-  var hash = this.hash;
-  $('html, body').animate({
-    scrollTop: $(this.hash).offset().top
-  }, 1000);
-});
+document.addEventListener('DOMContentLoaded', function () {
+    const skillsProg = document.querySelectorAll('.skills-prog li[data-percent]');
+    const skillsSoft = document.querySelectorAll('.skills-soft li[data-percent]');
 
+    skillsProg.forEach(skill => {
+        const percent = skill.getAttribute('data-percent');
+        const progressBar = skill.querySelector('.skills-bar .bar');
+        progressBar.style.width = percent + '%';
+    });
 
-$('.toggler, .nav-content a:not(#dropdown-link)').on('click', function(){
-  $('.toggler').toggleClass('change');
-  $('.nav-content').slideToggle();
-  $('#dropdown-menu').slideUp();
-  $('.menu-overlay').toggle();
-});
-
-$('.nav-content .dropdown').on('click', function(){
-  $('#dropdown-menu').slideToggle();
-});
-
-$('.menu-overlay').on('click', function(){
-  $('.toggler').removeClass('change');
-  $('.nav-content').slideUp();
-  $('#dropdown-menu').slideUp();
-  $('.menu-overlay').hide();
-});
-
-$("#contact input, #contact textarea").on('focusout', function(){
-
-  var text_val = $(this).val();
-  if (text_val === "") {
-    $(this).removeClass('has-value');
-  } else {
-    $(this).addClass('has-value');
-  }
-
+    skillsSoft.forEach(skill => {
+        const percent = skill.getAttribute('data-percent');
+        const progressBar = skill.querySelector('.cbar');
+        progressBar.style.strokeDashoffset = 283 - (percent / 100) * 283;
+    });
 });
